@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.business_idea.business_ideas_app">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/mainlogo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/mainlogo"
+        android:supportsRtl="true"
+        android:theme="@style/SplashTheme">
+        <activity android:name=".NewsApiSys.DetailsActivity"></activity>
+        <activity android:name=".NewsActivity" />
+        <activity android:name=".ChatAreaActivity" />
+        <activity android:name=".MyProfileActivity" />
+        <activity android:name=".BusinessIdeasActivity" />
+        <activity android:name=".SponsersActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".Service.FCMService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".DashboardActivity"
+            android:label="Dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".PostBlogsActivity" />
+        <activity android:name=".ShowBlogsActivity" />
+        <activity android:name=".ChatRoomActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".MyBlogActivity" />
+    </application>
+
+</manifest>

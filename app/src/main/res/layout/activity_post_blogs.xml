@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000">
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/blog"
+        android:alpha="0.8" />
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txtcancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textSize="16dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="#fff"
+            android:layout_marginLeft="20dp"/>
+        <com.business_idea.business_ideas_app.customfonts.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Write Your Blog"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="bottom"
+            android:textColor="#fff"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post"
+            android:textSize="16dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:id="@+id/txtpost"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:textColor="#fff"/>
+    </android.support.v7.widget.Toolbar>
+    </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.business_idea.business_ideas_app.customfonts.MyEditText
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+
+            android:textStyle="bold"
+            android:background="#00000000"
+            android:hint="Title"
+            android:inputType="textEmailAddress"
+            android:padding="18dp"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.business_idea.business_ideas_app.customfonts.MyEditText
+            android:id="@+id/txtAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+
+            android:textStyle="bold"
+            android:background="#00000000"
+            android:hint="Author Name"
+            android:inputType="textEmailAddress"
+            android:padding="18dp"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC"/>
+    <com.business_idea.business_ideas_app.customfonts.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:hint="Write Your Blog Here...."
+        android:gravity="start"
+        android:textColor="#868686"
+        android:textDirection="ltr"
+        android:id="@+id/_txtblog"
+        android:textSize="16dp"
+
+        android:background="#f0f0f4"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:cardCornerRadius="5dp"
+
+            >
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/imgforblog"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:background="#caccd1"
+            android:src="@drawable/selectimage"
+            />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
