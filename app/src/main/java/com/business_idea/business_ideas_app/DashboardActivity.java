@@ -181,6 +181,21 @@ blogcard=findViewById(R.id.blogcard);
         editor.apply();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // Toast.makeText(DashboardActivity.this,"Back Again from OnResume Function",Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        Toast.makeText(DashboardActivity.this,"Back Again from OnStart Function",Toast.LENGTH_LONG).show();
+    }
+
     public void getData()
     {
 
