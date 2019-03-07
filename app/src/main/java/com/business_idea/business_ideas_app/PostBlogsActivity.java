@@ -1,7 +1,9 @@
 package com.business_idea.business_ideas_app;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -13,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,10 +42,12 @@ import com.rey.material.widget.EditText;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class PostBlogsActivity extends AppCompatActivity {
-private TextView txtcancel,txtpost;
+private TextView txtcancel,txtpost,txtideacategory;
  private com.business_idea.business_ideas_app.customfonts.MyEditText txtTitle,txtAuthor,_txtblog;
 private ImageView imgblog;
 private static String  count;
@@ -54,6 +59,7 @@ String usecount;
   private   FirebaseStorage storage;
     private DatabaseReference mRef,refroot;
     private FirebaseDatabase firebaseDatabase;
+    private com.toptoche.searchablespinnerlibrary.SearchableSpinner spinnerpanel,spinnerrange;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +67,15 @@ String usecount;
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         FirebaseApp.initializeApp(this);
         txtcancel=findViewById(R.id.txtcancel);
+        spinnerpanel=findViewById(R.id.spinnerpanel);
+        spinnerrange=findViewById(R.id.spinnerrange);
         txtpost=findViewById(R.id.txtpost);
         txtTitle=findViewById(R.id.txtTitle);
         txtAuthor=findViewById(R.id.txtAuthor);
         _txtblog=findViewById(R.id._txtblog);
         imgblog=findViewById(R.id.imgforblog);
         auth = FirebaseAuth.getInstance();
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRef=firebaseDatabase.getReference("posts");
         // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -88,12 +97,15 @@ String usecount;
             }
         });
 
+        categorychossing();
+        investmentrange();
+
 txtpost.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
         try {
-
+            FirebaseMessaging.getInstance().subscribeToTopic("pushNotificationForBlog");
 
             getChildCount();
 
@@ -130,6 +142,68 @@ txtpost.setOnClickListener(new View.OnClickListener() {
         editor.putString(key, value);
         editor.apply();
 
+    }
+public void investmentrange()
+{
+    List<String> spinnerArray =  new ArrayList<String>();
+    spinnerpanel.setTitle("Investment Ranges");
+    spinnerArray.add("Select Investment Ranges");
+
+    spinnerArray.add("5,000-10,000");
+    spinnerArray.add("10,000-20,000");
+    spinnerArray.add("20,000-30,000");
+    spinnerArray.add("30,000-50,000");
+    spinnerArray.add("50,000-80,000");
+    spinnerArray.add("80,000-95,000");
+    spinnerArray.add("100,000-150,000");
+    spinnerArray.add("more than 150,000");
+
+    // you need to have a list of data that you want the spinner to display
+
+
+
+
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+            this, android.R.layout.simple_spinner_item, spinnerArray);
+
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    //Spinner sItems = (Spinner) findViewById(R.id.spinner1);
+    spinnerrange.setAdapter(adapter);
+}
+    public void categorychossing()
+    {
+        List<String> spinnerArray =  new ArrayList<String>();
+        spinnerpanel.setTitle("Ideas Categories");
+        spinnerArray.add("Select Categories");
+
+        spinnerArray.add("App Developer");
+        spinnerArray.add("App Developer");
+        spinnerArray.add("Constructions");
+        spinnerArray.add("Antique Furniture Sales");
+        spinnerArray.add("Blog Consultant");
+        spinnerArray.add("Business Consultant");
+        spinnerArray.add("Appliance Repair Technician");
+        spinnerArray.add("Computer Repair and Maintenance");
+        spinnerArray.add("Customer Service Professional");
+        spinnerArray.add("Freelance Writer");
+        spinnerArray.add("Grant Writer");
+        spinnerArray.add("Hair Salon Owner");
+        spinnerArray.add("Ice Cream Shop Business");
+        spinnerArray.add("Laundry Service");
+        spinnerArray.add("ONLINE COACH");
+        spinnerArray.add("ONLINE Business");
+        spinnerArray.add("ONLINE TEACHING");
+        // you need to have a list of data that you want the spinner to display
+
+
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Spinner sItems = (Spinner) findViewById(R.id.spinner1);
+        spinnerpanel.setAdapter(adapter);
     }
     public String getChildCount()
     {
@@ -177,10 +251,12 @@ Toast.makeText(PostBlogsActivity.this,databaseError.getMessage(),Toast.LENGTH_SH
 
 
     }
-    private void writeNewPost(String userId, String title, String author,String blog,String blogimg,String blogdatetime,String userimg,String use1) {
-        PostData postblog = new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime);
+    private void writeNewPost(String userId, String title, String author,String blog,String blogimg,String blogdatetime,String userimg,String use1,String ideacategory,String investment) {
+      //  PostData postblog = new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0");
        long c=Integer.parseInt(use1)+1;
-        mRef.push().setValue(new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime));
+       String pushid=mRef.push().getKey();
+      // mRef.push().setValue(new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0"));
+        mRef.child(pushid).setValue(new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0",pushid,ideacategory,investment));
     }
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -210,7 +286,7 @@ Toast.makeText(PostBlogsActivity.this,databaseError.getMessage(),Toast.LENGTH_SH
                                     Calendar c = Calendar.getInstance();
                                     SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa");
                                     String datetime = dateformat.format(c.getTime());
-                                    writeNewPost(auth.getUid(),txtTitle.getText().toString(),txtAuthor.getText().toString(),_txtblog.getText().toString(),getDefaults("userimg",PostBlogsActivity.this),datetime,dlUri.toString(),use1);
+                                    writeNewPost(auth.getUid(),txtTitle.getText().toString(),txtAuthor.getText().toString(),_txtblog.getText().toString(),getDefaults("userimg",PostBlogsActivity.this),datetime,dlUri.toString(),use1,spinnerpanel.getSelectedItem().toString(),spinnerrange.getSelectedItem().toString());
                                     Toast.makeText(PostBlogsActivity.this, "Blog Uploaded", Toast.LENGTH_SHORT).show();
                                    // startActivity(new Intent(PostBlogsActivity.this,DashboardActivity.class));
                                 }

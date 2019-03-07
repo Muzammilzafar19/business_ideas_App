@@ -8,8 +8,12 @@ public class PostData {
     private String Uid;
     private String UserImage;
     private String PostDateTime;
+    private String Rating;
+    private String PushId;
+    private String IdeaCategory;
+    private String Investment;
 
-    public PostData(String title, String authorName, String blog, String blogImageUri, String uid, String userImage, String postDateTime) {
+    public PostData(String title, String authorName, String blog, String blogImageUri, String uid, String userImage, String postDateTime,String rating,String pushId , String ideacategory,String investment) {
         Title = title;
         AuthorName = authorName;
         Blog = blog;
@@ -17,7 +21,44 @@ public class PostData {
         Uid = uid;
         UserImage = userImage;
         PostDateTime = postDateTime;
+        Rating = rating;
+        PushId=pushId;
+        IdeaCategory=ideacategory;
+        Investment=investment;
 
+
+    }
+
+    public String getIdeaCategory() {
+        return IdeaCategory;
+    }
+
+    public void setIdeaCategory(String ideaCategory) {
+        IdeaCategory = ideaCategory;
+    }
+
+    public String getInvestment() {
+        return Investment;
+    }
+
+    public void setInvestment(String investment) {
+        Investment = investment;
+    }
+
+    public String getPushId() {
+        return PushId;
+    }
+
+    public void setPushId(String pushId) {
+        PushId = pushId;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
     }
 
     public String getTitle() {

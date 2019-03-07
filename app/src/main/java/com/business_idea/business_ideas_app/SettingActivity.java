@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class SettingActivity extends AppCompatActivity {
@@ -32,6 +33,13 @@ public class SettingActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if(notifyswitch.isChecked())
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("pushNotificationForBlog");
+        }
+        else {
+
+        }
         _btnbacksetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +53,7 @@ public class SettingActivity extends AppCompatActivity {
                 if(notifyswitch.isChecked())
                 {
                     // Subscribe
+                 //   FirebaseApp.initializeApp(SettingActivity.this);
                     FirebaseMessaging.getInstance().subscribeToTopic("pushNotificationForBlog");
                     setDefaults("notify","ON",SettingActivity.this);
                 }

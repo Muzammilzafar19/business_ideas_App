@@ -193,7 +193,7 @@ blogcard=findViewById(R.id.blogcard);
     protected void onStart() {
 
         super.onStart();
-        Toast.makeText(DashboardActivity.this,"Back Again from OnStart Function",Toast.LENGTH_LONG).show();
+      //  Toast.makeText(DashboardActivity.this,"Back Again from OnStart Function",Toast.LENGTH_LONG).show();
     }
 
     public void getData()

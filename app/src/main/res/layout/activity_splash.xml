@@ -24,13 +24,13 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         android:layout_marginStart="140dp"
         android:layout_marginEnd="140dp"
-        android:layout_marginBottom="40dp"
-        android:src="@drawable/loading"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/loader"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

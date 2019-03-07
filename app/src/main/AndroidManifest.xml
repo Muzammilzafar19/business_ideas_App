@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".Service.FCMService">
+        <service android:name="com.business_idea.business_ideas_app.Service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

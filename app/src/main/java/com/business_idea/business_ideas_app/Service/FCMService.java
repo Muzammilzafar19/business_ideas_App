@@ -47,9 +47,9 @@ auth=FirebaseAuth.getInstance();
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
-        if(!dataMessage.equals(auth.getUid())) {
+       // if(!dataMessage.equals(auth.getUid())) {
             sendNotification(notificationTitle, notificationBody, dataTitle, dataMessage);
-        }
+       // }
     }
 
     /**
@@ -74,11 +74,11 @@ auth=FirebaseAuth.getInstance();
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(2 , notificationBuilder.build());
-
-
+        notificationManager.notify(0 , notificationBuilder.build());
 
 /*
+
+
         NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notify=new Notification.Builder
                 (getApplicationContext()).setContentTitle("Notify").setContentText("helooooo")
@@ -90,7 +90,8 @@ auth=FirebaseAuth.getInstance();
         notif.notify(1, notify);
 
 
-*/
+
         Toast.makeText(FCMService.this,"New value added",Toast.LENGTH_SHORT).show();
+        */
     }
 }

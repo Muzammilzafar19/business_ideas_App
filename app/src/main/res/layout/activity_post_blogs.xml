@@ -101,10 +101,59 @@
             android:padding="18dp"
             android:textSize="20sp" />
     </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+
+                android:layout_height="50dp"
+
+                android:id="@+id/spinnerpanel"
+                android:textSize="14dp"
+                android:padding="10dp"
+
+                >
+
+            </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+        </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="#ACACAC"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+
+                android:layout_height="50dp"
+
+                android:id="@+id/spinnerrange"
+                android:textSize="14dp"
+                android:padding="10dp"
+
+                >
+
+            </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC"/>
+
     <com.business_idea.business_ideas_app.customfonts.MyEditText
         android:layout_width="match_parent"
         android:layout_height="180dp"

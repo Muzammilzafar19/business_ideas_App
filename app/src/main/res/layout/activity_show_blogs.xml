@@ -10,36 +10,117 @@
         android:layout_width="match_parent"
         android:id="@+id/tool"
         android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
         <ImageView
             android:id="@+id/btnblogback"
+android:layout_marginTop="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_arrow_back_black"
-            android:layout_marginLeft="20dp"/>
+         />
         <com.business_idea.business_ideas_app.customfonts.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Blog"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_gravity="center"
-            android:gravity="bottom"
+            android:layout_centerHorizontal="true"
+        android:id="@+id/mainheading"
             android:textColor="#000"/>
+            <ImageView
+                android:id="@+id/btnfilter"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/mainheading"
+android:layout_marginLeft="100dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_filter"
+                />
 
+        </RelativeLayout>
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_below="@+id/tool"
         android:layout_marginTop="5dp"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            >
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="wrap_content"
+
+                android:layout_height="40dp"
+                style="@style/spinner_style"
+                android:id="@+id/spinnerpanel"
+                android:textSize="14sp"
+                android:padding="10dp"
+
+                >
+
+            </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:background="#0a8ea0"
+                android:foreground="@drawable/ic_search"
+                android:id="@+id/btnsearch"
+                />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                >
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="40dp"
+                    style="@style/spinner_style"
+                    android:id="@+id/spinnerrange"
+                    android:textSize="14sp"
+                    android:padding="10dp"
+
+                    >
+
+                </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:background="#0a8ea0"
+                    android:foreground="@drawable/ic_search"
+                    android:id="@+id/btnsearchrange"
+                    />
+            </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:padding="5dp"
         android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        app:stackFromEnd="true"
+        app:reverseLayout="true"
 
         />
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>

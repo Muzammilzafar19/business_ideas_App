@@ -9,8 +9,12 @@ public class GetBlog {
     private String imgblog;
     private String imglike;
     private String imgshare;
+    private String Rating;
+    private String PushId;
+    private String IdeaCategory;
+    private String Investment;
 
-    public GetBlog(String title, String author, String blogtime, String blogwritten, String imgblogger, String imgblog, String imglike, String imgshare) {
+    public GetBlog(String title, String author, String blogtime, String blogwritten, String imgblogger, String imgblog, String imglike, String imgshare,String rating,String pushId,String ideacategory,String investment) {
         this.title = title;
         this.author = author;
         this.blogtime = blogtime;
@@ -19,6 +23,43 @@ public class GetBlog {
         this.imgblog = imgblog;
         this.imglike = imglike;
         this.imgshare = imgshare;
+        Rating=rating;
+        PushId=pushId;
+        IdeaCategory=ideacategory;
+        Investment=investment;
+
+    }
+
+    public String getIdeaCategory() {
+        return IdeaCategory;
+    }
+
+    public void setIdeaCategory(String ideaCategory) {
+        IdeaCategory = ideaCategory;
+    }
+
+    public String getInvestment() {
+        return Investment;
+    }
+
+    public void setInvestment(String investment) {
+        Investment = investment;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public String getPushId() {
+        return PushId;
+    }
+
+    public void setPushId(String pushId) {
+        PushId = pushId;
     }
 
     public String getTitle() {
