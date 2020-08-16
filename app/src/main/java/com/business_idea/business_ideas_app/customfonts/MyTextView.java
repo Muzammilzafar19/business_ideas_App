@@ -8,7 +8,7 @@ import android.util.AttributeSet;
  * Created by kamran on 27/6/16.
  
  */
-public class MyTextView extends android.support.v7.widget.AppCompatTextView {
+public class MyTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public MyTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

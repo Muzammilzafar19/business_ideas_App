@@ -1,17 +1,15 @@
 package com.business_idea.business_ideas_app;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,10 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.business_idea.business_ideas_app.DataClasses.PostData;
-import com.business_idea.business_ideas_app.DataClasses.UserData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
@@ -38,7 +33,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.rey.material.widget.EditText;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -47,7 +41,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class PostBlogsActivity extends AppCompatActivity {
-private TextView txtcancel,txtpost,txtideacategory;
+private TextView txtcancel,txtpost,txtideacategory,txtpostedit;
  private com.business_idea.business_ideas_app.customfonts.MyEditText txtTitle,txtAuthor,_txtblog;
 private ImageView imgblog;
 private static String  count;
@@ -74,6 +68,11 @@ String usecount;
         txtAuthor=findViewById(R.id.txtAuthor);
         _txtblog=findViewById(R.id._txtblog);
         imgblog=findViewById(R.id.imgforblog);
+        txtpostedit=findViewById(R.id.txtpostedit);
+
+
+
+
         auth = FirebaseAuth.getInstance();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -118,6 +117,26 @@ txtpost.setOnClickListener(new View.OnClickListener() {
         // Toast.makeText(getApplicationContext(),getChildCount(),Toast.LENGTH_SHORT).show();
     }
 });
+        try{
+            _txtblog.setText(getIntent().getExtras().getString("blogwritten"));
+            txtTitle.setText(getIntent().getExtras().getString("title"));
+            txtAuthor.setText(getIntent().getExtras().getString("blogauthor"));
+            txtpost.setVisibility(View.GONE);
+            txtpostedit.setVisibility(View.VISIBLE);
+            txtpostedit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseMessaging.getInstance().subscribeToTopic("pushNotificationForBlog");
+
+                    getChildCount();
+
+                    uploadImageEdit(getDefaults("postcount",PostBlogsActivity.this));
+                }
+            });
+        }catch (Exception ex)
+        {
+
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -258,6 +277,13 @@ Toast.makeText(PostBlogsActivity.this,databaseError.getMessage(),Toast.LENGTH_SH
       // mRef.push().setValue(new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0"));
         mRef.child(pushid).setValue(new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0",pushid,ideacategory,investment));
     }
+    private void writeEditPost(String pushid,String userId, String title, String author,String blog,String blogimg,String blogdatetime,String userimg,String use1,String ideacategory,String investment) {
+        //  PostData postblog = new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0");
+        long c=Integer.parseInt(use1)+1;
+      //  String pushid=mRef.push().getKey();
+        // mRef.push().setValue(new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0"));
+        mRef.child(pushid).setValue(new PostData(title,author,blog,blogimg,userId,userimg,blogdatetime,"0",pushid,ideacategory,investment));
+    }
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
@@ -314,6 +340,74 @@ Toast.makeText(PostBlogsActivity.this,databaseError.getMessage(),Toast.LENGTH_SH
                             progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
+        }
+        else {
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa");
+            String datetime = dateformat.format(c.getTime());
+            writeNewPost(auth.getUid(),txtTitle.getText().toString(),txtAuthor.getText().toString(),_txtblog.getText().toString(),getDefaults("userimg",PostBlogsActivity.this),datetime,"",use1,spinnerpanel.getSelectedItem().toString(),spinnerrange.getSelectedItem().toString());
+            Toast.makeText(PostBlogsActivity.this,"Image Not Uplaod But Blog is Saved",Toast.LENGTH_LONG).show();
+        }
+    }
+    private void uploadImageEdit(final String use1) {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading Blog...");
+
+            progressDialog.show();
+
+
+            ref = storageReference.child("post_images/"+ "p_"+String.valueOf(Integer.parseInt(use1)+1));
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+
+                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Uri dlUri = uri;
+                                    Calendar c = Calendar.getInstance();
+                                    SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa");
+                                    String datetime = dateformat.format(c.getTime());
+                                    writeEditPost(getIntent().getExtras().getString("pushid"),auth.getUid(),txtTitle.getText().toString(),txtAuthor.getText().toString(),_txtblog.getText().toString(),getDefaults("userimg",PostBlogsActivity.this),datetime,dlUri.toString(),use1,spinnerpanel.getSelectedItem().toString(),spinnerrange.getSelectedItem().toString());
+                                    Toast.makeText(PostBlogsActivity.this, "Blog Uploaded", Toast.LENGTH_SHORT).show();
+                                    // startActivity(new Intent(PostBlogsActivity.this,DashboardActivity.class));
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(PostBlogsActivity.this,"Error: "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(PostBlogsActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
+        else {
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa");
+            String datetime = dateformat.format(c.getTime());
+            writeEditPost(getIntent().getExtras().getString("pushid"),auth.getUid(),txtTitle.getText().toString(),txtAuthor.getText().toString(),_txtblog.getText().toString(),getDefaults("userimg",PostBlogsActivity.this),datetime,"",use1,spinnerpanel.getSelectedItem().toString(),spinnerrange.getSelectedItem().toString());
+            Toast.makeText(PostBlogsActivity.this,"Image Not Uplaod But Blog is Saved",Toast.LENGTH_LONG).show();
         }
     }
 }

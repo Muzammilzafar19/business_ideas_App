@@ -1,19 +1,16 @@
 package com.business_idea.business_ideas_app;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.business_idea.business_ideas_app.Adapter.BlogAdapter;
 import com.business_idea.business_ideas_app.Adapter.SponserAdapter;
-import com.business_idea.business_ideas_app.DataClasses.GetBlog;
 import com.business_idea.business_ideas_app.DataClasses.SponserData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -110,7 +107,7 @@ private FirebaseAuth auth;
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
             phoneNumbers.add((String) singleUser.get("title"));
-            _list.add(new SponserData((String) singleUser.get("userName"),(String) singleUser.get("imageUrl"),(String) singleUser.get("userType")));
+            _list.add(new SponserData((String) singleUser.get("userName"),(String) singleUser.get("imageUrl"),(String) singleUser.get("userType"),(String) singleUser.get("uid")));
             //  Toast.makeText(ShowBlogsActivity.this,(String) singleUser.get("title"),Toast.LENGTH_SHORT).show();
         }
         rv = findViewById(R.id.sponser_recycle);

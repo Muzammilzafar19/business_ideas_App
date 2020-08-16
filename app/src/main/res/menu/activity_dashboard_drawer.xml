@@ -9,6 +9,10 @@
             android:icon="@drawable/blogicon"
             android:title="Write Blog" />
         <item
+            android:id="@+id/nav_highrate"
+            android:icon="@drawable/highblog"
+            android:title="Top Blog" />
+        <item
             android:id="@+id/nav_sponsers"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="Sponsors" />

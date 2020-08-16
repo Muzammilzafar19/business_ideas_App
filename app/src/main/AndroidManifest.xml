@@ -12,7 +12,9 @@
         android:roundIcon="@drawable/mainlogo"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".NewsApiSys.DetailsActivity"></activity>
+        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".HighRatingIdeaActivity" />
+        <activity android:name=".NewsApiSys.DetailsActivity" />
         <activity android:name=".NewsActivity" />
         <activity android:name=".ChatAreaActivity" />
         <activity android:name=".MyProfileActivity" />
@@ -28,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.business_idea.business_ideas_app.Service.FCMService">
+        <service android:name=".Service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

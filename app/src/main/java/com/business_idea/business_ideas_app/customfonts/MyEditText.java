@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 /**
  * Created by kamran on 27/6/16.
  */
-public class MyEditText extends android.support.v7.widget.AppCompatEditText {
+public class MyEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     public MyEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

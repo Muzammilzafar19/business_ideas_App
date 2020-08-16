@@ -16,7 +16,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/businessideas"
             android:alpha="0.8" />
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -45,7 +45,7 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="20dp"
                 android:textColor="#fff"/>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
 
 
@@ -163,6 +163,34 @@
             android:background="#00000000"
             android:padding="16dp"/>
     </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.business_idea.business_ideas_app.customfonts.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Country"
+                android:textSize="14sp"
+                android:padding="20dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/myTextCountry" />
+            <com.business_idea.business_ideas_app.customfonts.MyEditText
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:id="@+id/editcountry"
+                android:hint="Enter Country"
+                android:background="#00000000"
+                android:padding="16dp"/>
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="0.1dp"

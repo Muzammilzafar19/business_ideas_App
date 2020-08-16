@@ -6,7 +6,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -23,6 +24,8 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,17 +34,18 @@ public class ChatAreaActivity extends AppCompatActivity {
     TextView txtName;
     ImageView _btnback;
     LinearLayout layout;
-    ImageView sendButton;
+    ImageView sendButton,btndelete;
     EditText messageArea;
     ScrollView scrollView;
     Firebase reference1, reference2;
-
+    private DatabaseReference mDatabase,refroot;
     private de.hdodenhof.circleimageview.CircleImageView imgchat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_area);
+        btndelete=findViewById(R.id._btndelete);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         txtName = findViewById(R.id.txtname);
         _btnback = findViewById(R.id._btnback);
@@ -116,6 +120,17 @@ public class ChatAreaActivity extends AppCompatActivity {
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
+            }
+        });
+
+        btndelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mDatabase= FirebaseDatabase.getInstance().getReference();
+                refroot=mDatabase.child("messages");
+refroot.child( getIntent().getExtras().getString("Name") + "_" + getDefaults("username",ChatAreaActivity.this)).removeValue();
+                Toast.makeText(ChatAreaActivity.this, "Message Deleted", Toast.LENGTH_SHORT).show();
             }
         });
     }

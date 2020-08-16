@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".ChatRoomActivity">
+    tools:context=".HighRatingIdeaActivity">
     <androidx.appcompat.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:id="@+id/tool"
-        android:background="#f3f4f7"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/_btnback"
+            android:id="@+id/btnback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
@@ -22,7 +20,7 @@
         <com.business_idea.business_ideas_app.customfonts.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chat List"
+            android:text="Top Ideas "
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_gravity="center"
@@ -30,19 +28,13 @@
             android:textColor="#000"/>
 
     </androidx.appcompat.widget.Toolbar>
-    <androidx.cardview.widget.CardView
+    <androidx.recyclerview.widget.RecyclerView
+        android:padding="5dp"
+        android:layout_below="@+id/tool"
+        android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
 
-        android:layout_marginTop="2dp"
-
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:padding="5dp"
-            android:id="@+id/chatlist_recycle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
-
-            />
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+        />
+</RelativeLayout>

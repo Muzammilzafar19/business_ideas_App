@@ -4,11 +4,21 @@ public class SponserData {
     private String SponserName;
     private String SponserImgUri;
     private String SponserType;
+    private String SponserId;
 
-    public SponserData(String sponserName, String sponserImgUri, String sponserType) {
+    public SponserData(String sponserName, String sponserImgUri, String sponserType,String sponserid) {
         SponserName = sponserName;
         SponserImgUri = sponserImgUri;
         SponserType = sponserType;
+        SponserId=sponserid;
+    }
+
+    public String getSponserId() {
+        return SponserId;
+    }
+
+    public void setSponserId(String sponserId) {
+        SponserId = sponserId;
     }
 
     public String getSponserName() {

@@ -4,35 +4,27 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.module.AppGlideModule;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alexzh.circleimageview.CircleImageView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -53,115 +45,118 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        profileimg=findViewById(R.id.profileimg);
-        ideacard=findViewById(R.id.ideacard);
-        newscard=findViewById(R.id.newscard);
-        profilecard=findViewById(R.id.profilecard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        try{
-            if(getDefaults("firstTime",DashboardActivity.this).equals("Yes"))
-            {
 
-            }
-        }
-        catch (Exception e)
-        {
-            FirebaseApp.initializeApp(this);
-         setDefaults("firstTime","Yes",DashboardActivity.this);
-        }
+            profileimg=findViewById(R.id.profileimg);
+            ideacard=findViewById(R.id.ideacard);
+            newscard=findViewById(R.id.newscard);
+            profilecard=findViewById(R.id.profilecard);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            try{
+                if(getDefaults("firstTime",DashboardActivity.this).equals("Yes"))
+                {
 
-        try {
-
-
-// Handle possible data accompanying notification message.
-            if (getIntent().getExtras() != null) {
-                for (String key : getIntent().getExtras().keySet()) {
-                    if (key.equals("title")) {
-                        dataTitle=(String)getIntent().getExtras().get(key);
-                    }
-                    if (key.equals("message")) {
-                        dataMessage = (String)getIntent().getExtras().get(key);;
-
-                    }
                 }
-                showAlertDialog();
             }
-        } catch (Exception e) {
-            Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
-        newscard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this,NewsActivity.class));
-            }
-        });
-        ideacard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this,BusinessIdeasActivity.class));
-               // finish();
-            }
-        });
-        profilecard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this,MyProfileActivity.class));
-               // finish();
-            }
-        });
-blogcard=findViewById(R.id.blogcard);
-        auth=FirebaseAuth.getInstance();
-        setSupportActionBar(toolbar);
-        blogcard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this,ShowBlogsActivity.class));
-
-            }
-        });
-
-        try {
-            if(getDefaults("ValueStored",DashboardActivity.this).equals("Yes"))
+            catch (Exception e)
             {
-                txtMainName=findViewById(R.id.txtMainName);
-                txtuseremail_=findViewById(R.id._txtuseremail);
-                _imgperson=findViewById(R.id._imgperson);
-                txtuseremail_.setText(getDefaults("useremail",DashboardActivity.this));
-                txtMainName.setText(getDefaults("username",DashboardActivity.this));
-                RequestOptions requestOptions=new RequestOptions();
-                requestOptions.placeholder(R.drawable.person);
-
-                Glide.with(DashboardActivity.this).load(getDefaults("userimg",DashboardActivity.this)).apply(requestOptions).into(_imgperson);
-                Glide.with(DashboardActivity.this).load(getDefaults("userimg",DashboardActivity.this)).apply(requestOptions).into(profileimg);
+                FirebaseApp.initializeApp(this);
+             setDefaults("firstTime","Yes",DashboardActivity.this);
             }
-            else {
-                getData();}
 
-        } catch (Exception e) {
-            getData();
-           // Toast.makeText(DashboardActivity.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
+            try {
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                       // .setAction("Action", null).show();
-                startActivity(new Intent(DashboardActivity.this,ChatRoomActivity.class));
+    // Handle possible data accompanying notification message.
+                if (getIntent().getExtras() != null) {
+                    for (String key : getIntent().getExtras().keySet()) {
+                        if (key.equals("title")) {
+                            dataTitle=(String)getIntent().getExtras().get(key);
+                        }
+                        if (key.equals("message")) {
+                            dataMessage = (String)getIntent().getExtras().get(key);;
+
+                        }
+                    }
+                    showAlertDialog();
+                }
+            } catch (Exception e) {
+                Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
             }
-        });
+            newscard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(DashboardActivity.this,NewsActivity.class));
+                }
+            });
+            ideacard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(DashboardActivity.this,BusinessIdeasActivity.class));
+                   // finish();
+                }
+            });
+            profilecard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(DashboardActivity.this,MyProfileActivity.class));
+                   // finish();
+                }
+            });
+            blogcard=findViewById(R.id.blogcard);
+            auth=FirebaseAuth.getInstance();
+            setSupportActionBar(toolbar);
+            blogcard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(DashboardActivity.this,ShowBlogsActivity.class));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+                }
+            });
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+            try {
+                if(getDefaults("ValueStored",DashboardActivity.this).equals("Yes"))
+                {
+                    txtMainName=findViewById(R.id.txtMainName);
+                    txtuseremail_=findViewById(R.id._txtuseremail);
+                    _imgperson=findViewById(R.id._imgperson);
+                    txtuseremail_.setText(getDefaults("useremail",DashboardActivity.this));
+                    txtMainName.setText(getDefaults("username",DashboardActivity.this));
+                    RequestOptions requestOptions=new RequestOptions();
+                    requestOptions.placeholder(R.drawable.person);
+
+                    Glide.with(DashboardActivity.this).load(getDefaults("userimg",DashboardActivity.this)).apply(requestOptions).into(_imgperson);
+                    Glide.with(DashboardActivity.this).load(getDefaults("userimg",DashboardActivity.this)).apply(requestOptions).into(profileimg);
+                }
+                else {
+                 getData();
+                    }
+
+            } catch (Exception e) {
+           getData();
+              // Toast.makeText(DashboardActivity.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+
+
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                           // .setAction("Action", null).show();
+                    startActivity(new Intent(DashboardActivity.this,ChatRoomActivity.class));
+                }
+            });
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
     }
         private void showAlertDialog() {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -216,9 +211,9 @@ blogcard=findViewById(R.id.blogcard);
                     String a= String.valueOf(dataSnapshot.getChildrenCount());
                     String name= dataSnapshot.child("userName").getValue().toString();
                     String usid=dataSnapshot.child("uid").getValue().toString();
-                    String UserType=dataSnapshot.child("userType").getValue().toString();
+                   String UserType=dataSnapshot.child("userType").getValue().toString();
                     String UserAbout=dataSnapshot.child("userAbout").getValue().toString();
-                    String UserGender=dataSnapshot.child("userGender").getValue().toString();
+                 String UserGender=dataSnapshot.child("userGender").getValue().toString();
                     String UserAge=dataSnapshot.child("userAge").getValue().toString();
                     String email= dataSnapshot.child("userEmail").getValue().toString();
                     String imgurl=dataSnapshot.child("imageUrl").getValue().toString();
@@ -315,6 +310,10 @@ blogcard=findViewById(R.id.blogcard);
             startActivity(new Intent(DashboardActivity.this,SettingActivity.class));
 
 
+        }
+        else if(id==R.id.nav_highrate)
+        {
+            startActivity(new Intent(DashboardActivity.this,HighRatingIdeaActivity.class));
         }
         else if (id == R.id.nav_sponsers) {
             startActivity(new Intent(DashboardActivity.this,SponsersActivity.class));
