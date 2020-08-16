@@ -26,6 +26,7 @@ public class ListNewsAdapter extends BaseAdapter {
         activity = a;
         data=d;
     }
+
     public int getCount() {
         return data.size();
     }
