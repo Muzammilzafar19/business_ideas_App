@@ -74,8 +74,6 @@ public class LoginActivity extends AppCompatActivity {
             refroot.addListenerForSingleValueEvent(eventListener);
 
 
-
-
         }
 
 

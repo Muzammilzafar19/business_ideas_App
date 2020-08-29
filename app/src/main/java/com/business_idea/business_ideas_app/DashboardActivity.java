@@ -52,15 +52,15 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             profilecard=findViewById(R.id.profilecard);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             try{
-                if(getDefaults("firstTime",DashboardActivity.this).equals("Yes"))
+                if(getDefaults("firstTime",DashboardActivity.this)!=null && !getDefaults("firstTime",DashboardActivity.this).equals("Yes"))
                 {
-
+                    FirebaseApp.initializeApp(this);
+                    setDefaults("firstTime","Yes",DashboardActivity.this);
                 }
             }
-            catch (Exception e)
+            catch (Exception ignored)
             {
-                FirebaseApp.initializeApp(this);
-             setDefaults("firstTime","Yes",DashboardActivity.this);
+
             }
 
             try {

@@ -116,7 +116,6 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if (aSwitch.isChecked()) {
-
                         UserType = "Investor";
                     }
                     if (aSwitch1.isChecked()) {
@@ -125,14 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
                     if (aSwitch2.isChecked()) {
                         UserType = "Mentor";
                     }
-
-
                     uploadImage();
-
-
-                    //  Toast.makeText(ProfileActivity.this,"Record Successfully Saved",Toast.LENGTH_SHORT).show();
-                    //   finish();
-
                 } catch (Exception e) {
                     Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
