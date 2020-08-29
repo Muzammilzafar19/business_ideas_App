@@ -26,10 +26,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.rey.material.widget.Switch;
 
 import java.io.IOException;
 
@@ -42,11 +44,12 @@ public class MyProfileActivity extends AppCompatActivity {
     Uri filePath;
     StorageReference ref;
     String UserType;
-    TextView txtuserType;
+    Switch enbleswitch;
+    TextView _txtuserType;
     FirebaseStorage storage;
     StorageReference storageReference;
     private FirebaseAuth auth;
-    private EditText editName,editEmail,editAge,editUserAbout;
+    private EditText editName,editEmail,editAge,editUserAbout,editCountry;
     private DatabaseReference mDatabase,refroot;
 
     TextView txtupdate;
@@ -56,10 +59,52 @@ public class MyProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        txtuserType=findViewById(R.id.txtuserType);
+        _txtuserType=findViewById(R.id._txtuserType);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         init();
+
+        enbleswitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtupdate.setVisibility(View.VISIBLE);
+                if(enbleswitch.isChecked())
+                {
+                    if(checkmale.isChecked())
+                    {
+                        Gender="Male";
+                        checkfemale.setEnabled(false);
+                    }
+                    else {
+                        checkfemale.setEnabled(true);
+                    }
+                    if(checkfemale.isChecked())
+                    {
+                        Gender="Female";
+                        checkmale.setEnabled(false);
+                    }
+                    else {
+                        checkmale.setEnabled(true);
+                    }
+                    editName.setEnabled(true);
+                    editAge.setEnabled(true);
+                    editCountry.setEnabled(true);
+                    editUserAbout.setEnabled(true);
+                    checkmale.setEnabled(true);
+                    checkfemale.setEnabled(true);
+
+                }
+                else {
+                    editName.setEnabled(false);
+                    editAge.setEnabled(false);
+                    editCountry.setEnabled(false);
+                    editUserAbout.setEnabled(false);
+                    checkmale.setEnabled(false);
+                    checkfemale.setEnabled(false);
+
+                }
+            }
+        });
 imgperson.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -79,6 +124,7 @@ imgperson.setOnClickListener(new View.OnClickListener() {
         editName.setText(getDefaults("username",MyProfileActivity.this));
         editEmail.setText(getDefaults("useremail",MyProfileActivity.this));
         editAge.setText(getDefaults("userAge",MyProfileActivity.this));
+        editCountry.setText("Pakistan");
         if(getDefaults("userGender",MyProfileActivity.this).equals("Male"))
         {
             checkmale.setChecked(true);
@@ -91,12 +137,27 @@ imgperson.setOnClickListener(new View.OnClickListener() {
 
         Glide.with(MyProfileActivity.this).load(getDefaults("userimg",MyProfileActivity.this)).apply(requestOptions).into(imgperson);
         editUserAbout.setText(getDefaults("userAbout",MyProfileActivity.this));
-  txtuserType.setText("You are "+getDefaults("usertype",MyProfileActivity.this));
+  _txtuserType.setText(getDefaults("usertype",MyProfileActivity.this));
         CheckFn();
-  txtupdate.setOnClickListener(new View.OnClickListener() {
+        try {
+
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            storage = FirebaseStorage.getInstance();
+            storageReference = storage.getReference();
+        } catch (Exception e) {
+            Toast.makeText(MyProfileActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+
+        txtupdate.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+          try {
+              uploadImage();
 
+          } catch (Exception e) {
+              Toast.makeText(MyProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+          }
       }
   });
 
@@ -147,9 +208,11 @@ imgperson.setOnClickListener(new View.OnClickListener() {
         editEmail=findViewById(R.id.editEmail);
         editAge=findViewById(R.id.editage);
         editUserAbout=findViewById(R.id.edituserAbout);
+        editCountry=findViewById(R.id.editcountry);
+        enbleswitch=findViewById(R.id.enbleswitch);
     }
     private void writeNewUser(String userId, String name, String email,String Age,String Gender,String UserType,String UserAbout,String ImageUrl) {
-        UserData user = new UserData(userId,name, email,Age,Gender,UserType,UserAbout,ImageUrl);
+        UserData user = new UserData(userId,name, email,Age,Gender,UserType,UserAbout,ImageUrl,editCountry.getText().toString());
         mDatabase.child("users").child(userId).setValue(user);
     }
     @Override
@@ -189,10 +252,18 @@ imgperson.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Uri dlUri = uri;
-
-                                    writeNewUser(auth.getUid(),editName.getText().toString(),editEmail.getText().toString(),editAge.getText().toString(),Gender,UserType,editUserAbout.getText().toString(), dlUri.toString());
-                                    Toast.makeText(MyProfileActivity.this, "PROFILE SAVED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(MyProfileActivity.this,DashboardActivity.class));
+                                    setDefaults("userimg",dlUri.toString(),MyProfileActivity.this);
+                                    setDefaults("username",editName.getText().toString(),MyProfileActivity.this);
+                                    setDefaults("useremail",editEmail.getText().toString(),MyProfileActivity.this);
+                                    setDefaults("userid",auth.getUid(),MyProfileActivity.this);
+                                    setDefaults("usertype",_txtuserType.getText().toString(),MyProfileActivity.this);
+                                    setDefaults("userAge",editAge.getText().toString(),MyProfileActivity.this);
+                                    setDefaults("userGender",Gender,MyProfileActivity.this);
+                                    setDefaults("userAbout",editUserAbout.getText().toString(),MyProfileActivity.this);
+                                    setDefaults("ValueStored","Yes",MyProfileActivity.this);
+                                    writeNewUser(auth.getUid(),editName.getText().toString(),editEmail.getText().toString(),editAge.getText().toString(),Gender,_txtuserType.getText().toString(),editUserAbout.getText().toString(), dlUri.toString());
+                                    Toast.makeText(MyProfileActivity.this, "PROFILE UPDATED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                                   // startActivity(new Intent(MyProfileActivity.this,DashboardActivity.class));
                                 }
                             });
 
@@ -221,5 +292,25 @@ imgperson.setOnClickListener(new View.OnClickListener() {
                         }
                     });
         }
+        else {
+            setDefaults("userimg",getDefaults("userimg",MyProfileActivity.this),MyProfileActivity.this);
+            setDefaults("username",editName.getText().toString(),MyProfileActivity.this);
+            setDefaults("useremail",editEmail.getText().toString(),MyProfileActivity.this);
+            setDefaults("userid",auth.getUid(),MyProfileActivity.this);
+            setDefaults("usertype",_txtuserType.getText().toString(),MyProfileActivity.this);
+            setDefaults("userAge",editAge.getText().toString(),MyProfileActivity.this);
+            setDefaults("userGender",Gender,MyProfileActivity.this);
+            setDefaults("userAbout",editUserAbout.getText().toString(),MyProfileActivity.this);
+            setDefaults("ValueStored","Yes",MyProfileActivity.this);
+            writeNewUser(auth.getUid(),editName.getText().toString(),editEmail.getText().toString(),editAge.getText().toString(),Gender,_txtuserType.getText().toString(),editUserAbout.getText().toString(), "");
+            Toast.makeText(MyProfileActivity.this, "PROFILE UPDATED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void setDefaults(String key,String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.apply();
+
     }
 }

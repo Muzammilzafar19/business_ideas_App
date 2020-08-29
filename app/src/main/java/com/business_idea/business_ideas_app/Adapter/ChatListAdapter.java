@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.business_idea.business_ideas_app.ChatAreaActivity;
 import com.business_idea.business_ideas_app.DataClasses.ChatListData;
 import com.business_idea.business_ideas_app.R;
+import com.business_idea.business_ideas_app.UserProfileActivity;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public ChatListAdapter(Context c,List<ChatListData> _list)
         holder.txtChatName.setText(cd.getChaterName());
         holder.txtChaterType.setText(cd.getChaterType());
         holder.txthiddenuri.setText(cd.getChaterImg());
+        holder.txtchaterid.setText(cd.getChaterId());
         RequestOptions requestOptions=new RequestOptions();
         requestOptions.placeholder(R.drawable.person);
 
@@ -60,7 +62,7 @@ public ChatListAdapter(Context c,List<ChatListData> _list)
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtChatName,txtChaterType,txthiddenuri;
+        private TextView txtChatName,txtChaterType,txthiddenuri,txtchaterid;
 
         private de.hdodenhof.circleimageview.CircleImageView imgChater;
 
@@ -70,6 +72,7 @@ public ChatListAdapter(Context c,List<ChatListData> _list)
             txthiddenuri=itemView.findViewById(R.id.txthiddenuri);
             txtChaterType=itemView.findViewById(R.id.txtChaterType);
             imgChater=itemView.findViewById(R.id.imgChat);
+            txtchaterid=itemView.findViewById(R.id.txtChaterId);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,17 @@ public ChatListAdapter(Context c,List<ChatListData> _list)
 
 
 
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent intent = new Intent(context, UserProfileActivity.class);
+                    intent.putExtra("useriddd",txtchaterid.getText().toString());
+
+
+                    context.startActivity(intent);
+                    return false;
                 }
             });
 

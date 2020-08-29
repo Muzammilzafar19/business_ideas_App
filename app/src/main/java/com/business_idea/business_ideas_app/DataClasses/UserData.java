@@ -6,11 +6,13 @@ public class UserData {
     private String UserName;
     private String UserEmail;
     private String UserAge;
+
     private String UserGender;
     private String UserType;
     private String UserAbout;
+    private String UserCountry;
 
-    public UserData(String uid,String userName, String userEmail, String userAge, String userGender, String userType, String userAbout,String imageurl) {
+    public UserData(String uid,String userName, String userEmail, String userAge, String userGender, String userType, String userAbout,String imageurl,String usercountry) {
         Uid=uid;
         ImageUrl=imageurl;
         UserName = userName;
@@ -19,6 +21,15 @@ public class UserData {
         UserGender=userGender;
         UserType = userType;
         UserAbout = userAbout;
+        UserCountry=usercountry;
+    }
+
+    public String getUserCountry() {
+        return UserCountry;
+    }
+
+    public void setUserCountry(String userCountry) {
+        UserCountry = userCountry;
     }
 
     public String getImageUrl() {

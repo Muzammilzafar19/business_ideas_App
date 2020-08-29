@@ -110,7 +110,7 @@ private FirebaseAuth auth;
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
             phoneNumbers.add((String) singleUser.get("title"));
-            _list.add(new SponserData((String) singleUser.get("userName"),(String) singleUser.get("imageUrl"),(String) singleUser.get("userType")));
+            _list.add(new SponserData((String) singleUser.get("userName"),(String) singleUser.get("imageUrl"),(String) singleUser.get("userType"),(String) singleUser.get("uid")));
             //  Toast.makeText(ShowBlogsActivity.this,(String) singleUser.get("title"),Toast.LENGTH_SHORT).show();
         }
         rv = findViewById(R.id.sponser_recycle);

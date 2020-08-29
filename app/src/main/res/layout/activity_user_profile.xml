@@ -16,7 +16,6 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/gobackplease"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
@@ -55,7 +54,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/person"
-android:layout_centerHorizontal="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
 
                 android:layout_marginBottom="2dp"
@@ -93,10 +92,10 @@ android:layout_centerHorizontal="true"
                     android:padding="20dp"/>
                 <com.business_idea.business_ideas_app.customfonts.MyEditText
                     android:layout_width="0dp"
+                    android:enabled="false"
+                    android:textColor="#000"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:enabled="false"
                     android:cursorVisible="false"
                     android:id="@+id/txteditName"
                     android:textSize="14sp"
@@ -124,11 +123,11 @@ android:layout_centerHorizontal="true"
                     android:padding="20dp"/>
                 <com.business_idea.business_ideas_app.customfonts.MyEditText
                     android:layout_width="0dp"
+                    android:enabled="false"
+                    android:textColor="#000"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
                     android:textSize="14sp"
-                    android:enabled="false"
                     android:cursorVisible="false"
                     android:id="@+id/editEmail"
                     android:hint="Enter Email"
@@ -157,10 +156,10 @@ android:layout_centerHorizontal="true"
                 <com.business_idea.business_ideas_app.customfonts.MyEditText
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
+                    android:enabled="false"
+                    android:textColor="#000"
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"
-                    android:textColor="#000"
-                    android:enabled="false"
                     android:inputType="number"
                     android:textSize="14sp"
                     android:id="@+id/editage"
@@ -190,9 +189,9 @@ android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:textSize="14sp"
                     android:textColor="#000"
                     android:enabled="false"
+                    android:textSize="14sp"
                     android:id="@+id/editcountry"
                     android:hint="Enter Country"
                     android:background="#00000000"
@@ -226,12 +225,12 @@ android:layout_centerHorizontal="true"
                     android:text="Male" />
                 <CheckBox
                     android:id="@+id/checkfemale"
+                    android:textColor="#000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="60dp"
-                    android:text="Female"
-                    android:textColor="#000"
                     android:enabled="false"
+                    android:text="Female"
                     />
 
             </LinearLayout>
@@ -247,22 +246,11 @@ android:layout_centerHorizontal="true"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:enabled="false"
                     android:textColor="#000"
+
+                    android:enabled="false"
                     android:gravity="center"
                     android:id="@+id/txtuserType"
-                    android:text="User Type"
-                    android:textSize="12dp"
-                    android:layout_marginLeft="15dp"
-                    android:padding="10dp"/>
-                <com.business_idea.business_ideas_app.customfonts.MyTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:textColor="#000"
-                    android:gravity="center"
-                    android:id="@+id/_txtuserType"
                     android:text="User Type"
                     android:textSize="12dp"
                     android:layout_marginLeft="15dp"
@@ -294,7 +282,7 @@ android:layout_centerHorizontal="true"
                 android:maxLines="10"
                 android:cursorVisible="false"
                 android:hint="Say Something About Yourself.."
-                android:textColor="#000"
+                android:textColor="#868686"
                 android:enabled="false"
                 android:id="@+id/edituserAbout"
                 android:textSize="16dp"
@@ -303,39 +291,6 @@ android:layout_centerHorizontal="true"
                 android:paddingBottom="10dp"
                 android:paddingLeft="22dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:background="#ACACAC"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <com.business_idea.business_ideas_app.customfonts.MyTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Enable Profile"
-                    android:textSize="14dp"
-                    android:layout_marginLeft="15dp"
-                    android:padding="20dp"/>
-                <com.rey.material.widget.Switch
-                    style="@style/MaterialSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:checked="false"
-
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="13dp"
-                    android:elevation="0dp"
-                    android:switchPadding="16dp"
-                    android:id="@+id/enbleswitch"
-                    />
-            </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.business_idea.business_ideas_app.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.business_idea.business_ideas_app.DashboardActivity;
 import com.business_idea.business_ideas_app.DataClasses.GetBlog;
 import com.business_idea.business_ideas_app.DataClasses.SponserData;
 import com.business_idea.business_ideas_app.R;
+import com.business_idea.business_ideas_app.UserProfileActivity;
 
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
        SponserData sd=sponserdata.get(position);
        holder.txtName.setText(sd.getSponserName());
        holder.txtType.setText(sd.getSponserType());
+       holder.txtid.setText(sd.getSponserId());
         RequestOptions requestOptions=new RequestOptions();
         requestOptions.placeholder(R.drawable.person);
 
@@ -63,7 +66,7 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtName,txtType;
+        private TextView txtName,txtType,txtid;
 
         private de.hdodenhof.circleimageview.CircleImageView imgperson;
 
@@ -72,20 +75,15 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.MyViewHo
      txtName=itemView.findViewById(R.id.txtsponsername);
 txtType=itemView.findViewById(R.id.txtsponserType);
 imgperson=itemView.findViewById(R.id.imgsponser);
+txtid=itemView.findViewById(R.id.txtsponserid);
 
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View view) {
-
-                   /* Intent intent = new Intent(context, Patient_ProfileActivity.class);
-                    intent.putExtra("Name",name.getText().toString());
-                    intent.putExtra("Detail",Id.getText().toString());
-                    intent.putExtra("ImageUrl",hiddenfield.getText().toString());
-                    context.startActivity(intent);*/
-
-
-
+                public boolean onLongClick(View v) {
+                    Intent intent=new Intent(context, UserProfileActivity.class);
+                    intent.putExtra("useriddd",txtid.getText().toString());
+                    context.startActivity(intent);
+                    return false;
                 }
             });
 

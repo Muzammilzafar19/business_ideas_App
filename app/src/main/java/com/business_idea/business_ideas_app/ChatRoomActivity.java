@@ -105,7 +105,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
             //phoneNumbers.add((String) singleUser.get("title"));
-            _list.add(new ChatListData((String) singleUser.get("userName"), (String) singleUser.get("userType"), (String) singleUser.get("imageUrl")));
+            _list.add(new ChatListData((String) singleUser.get("userName"), (String) singleUser.get("userType"), (String) singleUser.get("imageUrl"),(String) singleUser.get("uid")));
             //  Toast.makeText(ShowBlogsActivity.this,(String) singleUser.get("title"),Toast.LENGTH_SHORT).show();
         }
         rv = findViewById(R.id.chatlist_recycle);

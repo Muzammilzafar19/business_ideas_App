@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
-    app:cardElevation="5dp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="4dp"
+    app:cardElevation="5dp"
     android:layout_marginBottom="4dp"
     >
     <RelativeLayout
@@ -15,81 +15,81 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         >
-    <LinearLayout
-        android:id="@+id/linear1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:orientation="horizontal"
-        >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgblogger"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/person"
-            />
-        <com.business_idea.business_ideas_app.customfonts.MyTextView
+        <LinearLayout
+            android:id="@+id/linear1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="19sp"
-            android:id="@+id/txtblogtitle"
-android:textAllCaps="true"
-            android:text="Blog Title"
-            android:textStyle="bold"
-            android:maxLines="3"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
-            android:padding="5dp"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear2"
-        android:layout_below="@+id/linear1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        >
-        <com.business_idea.business_ideas_app.customfonts.MyTextView
-            android:layout_width="wrap_content"
+
+            android:orientation="horizontal"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgblogger"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/person"
+                />
+            <com.business_idea.business_ideas_app.customfonts.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:id="@+id/txtblogtitle"
+                android:textAllCaps="true"
+                android:text="Blog Title"
+                android:textStyle="bold"
+                android:maxLines="3"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp"
+                android:padding="5dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_below="@+id/linear1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Author Name"
-            android:id="@+id/txtblogauthor"
-            android:textColor="#037ef3"
-            android:layout_marginLeft="5dp"
-            />
-        <com.business_idea.business_ideas_app.customfonts.MyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TimeStamp"
-        android:id="@+id/txtblogtimestamp"
-        android:textColor="#037ef3"
-        android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            >
+            <com.business_idea.business_ideas_app.customfonts.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author Name"
+                android:id="@+id/txtblogauthor"
+                android:textColor="#037ef3"
+                android:layout_marginLeft="5dp"
+                />
+            <com.business_idea.business_ideas_app.customfonts.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TimeStamp"
+                android:id="@+id/txtblogtimestamp"
+                android:textColor="#037ef3"
+                android:layout_marginLeft="10dp"
 
-        />
-        <com.business_idea.business_ideas_app.customfonts.MyTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TimeStamp"
-            android:id="@+id/txtpushid"
-       android:visibility="gone"
-            android:layout_marginLeft="10dp"
+                />
+            <com.business_idea.business_ideas_app.customfonts.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TimeStamp"
+                android:id="@+id/txtpushid"
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
 
-            />
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="8dp"
-    android:id="@+id/txtuid"
-    android:visibility="gone"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8dp"
+                android:id="@+id/txtuid"
+                android:visibility="gone"
 
-    />
+                />
 
-    </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -158,22 +158,22 @@ android:textAllCaps="true"
             android:id="@+id/scroll"
 
             >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:orientation="vertical"
-            >
-            <com.business_idea.business_ideas_app.customfonts.MyTextView
+            <LinearLayout
                 android:layout_width="match_parent"
-
-                android:id="@+id/txtblogwritten"
                 android:layout_height="wrap_content"
-                android:text="Blog written here..."
-                android:textSize="14sp"
-              android:layout_marginBottom="5dp"
-                android:padding="5dp"/>
-        </LinearLayout>
+
+                android:orientation="vertical"
+                >
+                <com.business_idea.business_ideas_app.customfonts.MyTextView
+                    android:layout_width="match_parent"
+
+                    android:id="@+id/txtblogwritten"
+                    android:layout_height="wrap_content"
+                    android:text="Blog written here..."
+                    android:textSize="14sp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"/>
+            </LinearLayout>
         </ScrollView>
         <LinearLayout
             android:layout_width="match_parent"
@@ -228,7 +228,7 @@ android:textAllCaps="true"
 
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                 android:text="Rating"
+                android:text="Rating"
                 android:id="@+id/txtratings"
                 />
         </LinearLayout>
@@ -237,6 +237,7 @@ android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/againlst"
             >
             <RatingBar
                 android:id="@+id/ratingstar"
@@ -245,12 +246,37 @@ android:textAllCaps="true"
                 android:layout_height="wrap_content"
                 android:theme="@style/RatingBar"
                 android:numStars="5"
-android:saveEnabled="false"
+                android:saveEnabled="false"
                 android:isIndicator="true"
                 android:clickable="false"
 
                 android:rating="0"
                 android:stepSize="0.5" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/againlst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="DELETE"
+               android:id="@+id/btndeletee"
+               android:background="#ce181e"
+               android:textColor="#fff"
+               />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EDIT"
+                android:id="@+id/btnedit"
+                android:background="#4298b5"
+                android:textColor="#fff"
+                />
 
         </LinearLayout>
     </RelativeLayout>

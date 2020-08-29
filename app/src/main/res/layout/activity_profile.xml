@@ -172,6 +172,34 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.business_idea.business_ideas_app.customfonts.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Country"
+                android:textSize="14sp"
+                android:padding="20dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/myTextCountry" />
+            <com.business_idea.business_ideas_app.customfonts.MyEditText
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:id="@+id/editcountry"
+                android:hint="Enter Country"
+                android:background="#00000000"
+                android:padding="16dp"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.business_idea.business_ideas_app.customfonts.MyTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"

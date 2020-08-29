@@ -53,7 +53,19 @@
             android:textSize="14sp"
             android:layout_marginLeft="10dp"
             android:padding="15dp"/>
-
+        <com.business_idea.business_ideas_app.customfonts.MyTextView
+            android:layout_width="0dp"
+            android:id="@+id/txtChaterId"
+            android:layout_weight="0.35"
+            android:gravity="right"
+            android:visibility="gone"
+            android:textColor="#005670"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"/>
 
     </LinearLayout>
 
